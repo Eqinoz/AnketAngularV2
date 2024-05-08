@@ -1,0 +1,64 @@
+<form class="row g-3" [formGroup]="addForm">
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Email</label>
+    <input type="email" class="form-control" id="inputEmail4" />
+  </div>
+  <div class="col-md-6">
+    <label for="inputPassword4" class="form-label">İsim</label>
+    <input type="text" class="form-control" id="user_name" formControlName="user_name" />
+  </div>
+
+  <div class="col-md-6">
+    <ul class="list-group">
+      @for ( item of questions; track $index) {
+      <li class="list-group-item">{{item.question}}</li>
+      <ul class="list-group">
+        <li class="list-group-item" >
+          
+          @if (item.type==false) {
+           @for (ind of options; track $index) {
+            @if (ind.question_id==item.id) {
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  id="{{item.id}}"
+                  name="{{item.id}}"
+                  value="{{ ind.id }}"
+                    />
+                <label for="question">{{ ind.option }}</label>
+              </div>
+              
+            }
+          
+
+          } } @else if (item.type==true) {
+          <div class="form-floating">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea"
+            ></textarea>
+            <label for="floatingTextarea">Cevabınız.</label>
+          </div>
+          }
+          <div class="col-2">
+            <button type="submit" class="btn btn-primary" (click)="submit()">Kaydet</button>
+          </div>
+        </li>
+        <br />
+        
+      </ul>
+      }
+    </ul>
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck" />
+      <label class="form-check-label" for="gridCheck">
+        Cevapların Doğruluğunu Kabul Ediyorum.
+      </label>
+    </div>
+  </div>
+  
+</form>
